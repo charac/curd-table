@@ -1,0 +1,82 @@
+/*
+* @desc: 'table样式',
+*/
+
+@import '~@/assets/scss/mixin.scss';
+
+.table-common {
+  width: 100%;
+  border: none;
+  // height: 100%;
+  .el-card__body {
+    padding: 0;
+    .el-form {
+      display: flex;
+      justify-content: space-between;
+      .el-form-item__label {
+        white-space: nowrap;
+      }
+    }
+  }
+
+  .toolbar {
+    @include toolbar(none);
+  }
+
+  // table
+  .el-table {
+    &::before {
+      height: 0;
+    }
+    th {
+      color: #4d4c4f;
+      background-color: #eee;
+      font-size: 14px;
+    }
+
+    td {
+      padding: 16px 0;
+      font-size: 14px;
+    }
+
+    .cell {
+      color: #666;
+      white-space: nowrap;
+
+      .svg-icon{
+        margin: 0 5px;
+        white-space: nowrap;
+        cursor: pointer;
+      }
+    }
+  }
+
+  // 分页
+  .paging-style {
+    margin-top: 16px;
+    text-align: right;
+
+
+    .btn-prev,
+    .btn-next {
+      &:hover {
+        color: #0e4aa1;
+      }
+    }
+
+    // 跳转
+    .el-pagination__jump {
+      .el-pagination__editor {
+        width: 48px;
+        height: 32px;
+      }
+    }
+
+    //   overflow: hidden;
+  }
+
+  //解决表格有滚动条的情况下,title视觉错位问题
+  .gutter {
+    background-color: #f7f7f7 !important;
+  }
+}
