@@ -1,19 +1,21 @@
-import Vue from 'vue';
-import { utilConvert, hasOwn } from "@/libs/util.convert";
+import { createApp, nextTick } from 'vue'
+import { utilConvert, hasOwn } from "wheelutils";
 import xdialog from './xDialog.vue';
-const DialogConstructor = Vue.extend(xdialog);
+const DialogConstructor = createApp(xdialog);
+// const DialogConstructor = Vue.extend(xdialog);
 
 function show (vnode, title, opts) {
   let instance = new DialogConstructor({
     el: document.createElement('div')
   });
+  debugger
   instance.title = title;
   var ttt = instance.$createElement("div", {
     class: 'fillcontain'
   }, [vnode]);
   instance.$slots.default = [ttt];
   for (let prop in opts) {
-    if (opts.hasOwnProperty(prop)) {
+    if (opts.hasOwn(prop)) {
       instance[prop] = opts[prop];
     }
   }
@@ -25,7 +27,7 @@ function show (vnode, title, opts) {
     oldClose.call(instance);
   }
   app.appendChild(instance.$el);
-  Vue.nextTick(() => {
+  nextTick(() => {
     instance.visible = true;
   });
 }
