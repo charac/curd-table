@@ -1,15 +1,15 @@
 <!--
  * @since: 2021-11-24 14:23:10
  * @LastAuthor: Do not edit
- * @lastTime: 2021-11-29 17:02:40
- * @文件相对于项目的路径: \financial-sx-org-webe:\npm仓库\curd-table\examples\App.vue
+ * @lastTime: 2021-11-30 09:20:48
+ * @文件相对于项目的路径: \financial-sx-sso-webe:\npm仓库\curd-table\examples\App.vue
  * @Author: ltm@xtoneict.com
  * @message: 
 -->
 <template>
   <div id="nav">
     <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+    <router-link to="/about">About</router-link> |
     <router-link to="/curTable">自定义表格</router-link>
   </div>
   <router-view />

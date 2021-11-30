@@ -1,8 +1,8 @@
 /*
  * @since: 2021-11-24 14:23:10
  * @LastAuthor: Do not edit
- * @lastTime: 2021-11-29 17:02:49
- * @文件相对于项目的路径: \financial-sx-org-webe:\npm仓库\curd-table\examples\router\index.js
+ * @lastTime: 2021-11-30 08:59:22
+ * @文件相对于项目的路径: \financial-sx-sso-webe:\npm仓库\curd-table\examples\router\index.js
  * @Author: ltm@xtoneict.com
  * @message: 
  */

@@ -8,7 +8,7 @@
     rer="cardTable"
   >
     <!-- 操作搜索栏 -->
-    <el-form
+    <!-- <el-form
       inline
       :model="curd.formModel"
       v-if="showTableActionBar"
@@ -31,38 +31,22 @@
           <el-button type="text" @click="add" v-if="showAdd" size="small">{{
             addText
           }}</el-button>
-          <el-button
-            type="text"
-            @click="cancelPublishAll"
-            v-if="showCancelPublishAll"
-            size="small"
-            >批量取消发布</el-button
-          >
-          <el-button
-            type="text"
-            @click="publishAll"
-            v-if="showPublishAll"
-            size="small"
-            >批量发布</el-button
-          >
           <el-button type="text" @click="delAll" v-if="showDelAll" size="small"
             >批量删除</el-button
           >
         </template>
       </el-form-item>
-    </el-form>
+    </el-form> -->
     <!-- 表格按钮 -->
-    <el-row class="toolbar" v-if="showTableActionBtn">
+    <!-- <el-row class="toolbar" v-if="showTableActionBtn">
       <el-col :span="10" class="curd-item-btn">
-        <!-- 删除 -->
         <el-button v-if="showDelAll" @click="delAll" size="small">
           {{ delText }}
         </el-button>
         <slot name="toolRight"></slot>
       </el-col>
-    </el-row>
+    </el-row> -->
     <!-- 表格 -->
-    <!-- :height="curHeight"  表格高度设置隐藏 -->
     <el-table
       :data="rows"
       class="curd-custom__table"
@@ -74,13 +58,13 @@
       :height="curHeight"
     >
       <!-- 复选框 -->
-      <el-table-column
+      <!-- <el-table-column
         v-if="selectioBox"
         type="selection"
         :selectable="selectable"
-      />
+      /> -->
       <!-- 序号 -->
-      <el-table-column
+      <!-- <el-table-column
         v-if="showIndex"
         width="60"
         :resizable="false"
@@ -91,7 +75,7 @@
         </template>
       </el-table-column>
 
-      <slot></slot>
+      <slot></slot> -->
       <!-- 可增加的操作内容 -->
       <el-table-column
         v-if="useParamsAcation && showActions"
@@ -100,37 +84,37 @@
         @class-name="col - action"
         :resizable="false"
       >
-        <template slot-scope="scope">
+        <template v-slot="scope">
           <!-- 编辑 -->
-          <svg-icon
+          <!-- <svg-icon
             icon-class="bianjiNotcie"
             v-if="showEdit(scope.row)"
             :contentText="editText"
             @click="edit(scope.row, scope.$index)"
-          />
+          /> -->
           <!-- 发布 -->
-          <svg-icon
+          <!-- <svg-icon
             icon-class="bianjiNotcie"
             v-if="showPublish(scope.row)"
             :contentText="publishText"
             @click="publish(scope.row, scope.$index)"
-          />
+          /> -->
           <!-- 删除 -->
-          <svg-icon
+          <!-- <svg-icon
             icon-class="bianjiNotcie"
             v-if="showDel(scope.row)"
             :contentText="delText"
             @click="del(scope.row, scope.$index)"
-          />
+          /> -->
           <!-- 随机 -->
-          <svg-icon
+          <!-- <svg-icon
             :icon-class="act.iconClass"
             v-if="displayAction(act, scope.row, scope.$index)"
             v-for="(act, a) in actions"
             :key="a"
             :contentText="actionContentText(act)"
             @click="act.click(scope.row, act, scope.$index)"
-          />
+          /> -->
         </template>
       </el-table-column>
     </el-table>
@@ -152,7 +136,7 @@
 
 <script>
 import BScroll from "better-scroll";
-import { utilConvert } from "@/libs/util.convert";
+import { utilConvert } from "wheelutils";
 export default {
   name: "curdTable",
   props: {
@@ -280,7 +264,7 @@ export default {
   mounted() {
     this.scrollInit();
   },
-  beforeDestroy() {
+  beforeUnmount() {
     this.scrollDestroy();
   },
   computed: {
@@ -322,14 +306,6 @@ export default {
       }
       return "";
     },
-    // 发布
-    publishText() {
-      var o = this.curd.publish;
-      if (o) {
-        return o.name || "发布";
-      }
-      return "";
-    },
     // 删除
     delText() {
       var o = this.curd.del;
@@ -343,32 +319,15 @@ export default {
       var o = this.curd.add;
       return o && o.view && this.permissionButton(o.code);
     },
-    // 批量发布
-    showPublishAll() {
-      var o = this.curd.publish;
-      return (
-        o && o.api && o.publishAll === true && this.permissionButton(o.code)
-      );
-    },
     // 批量删除
     showDelAll() {
       var o = this.curd.del;
       return o && o.api && o.delAll === true && this.permissionButton(o.code);
     },
-    // 批量取消发布
-    showCancelPublishAll() {
-      var o = this.curd.cancelPublish;
-      return (
-        o &&
-        o.api &&
-        o.cancelPublishAll === true &&
-        this.permissionButton(o.code)
-      );
-    },
     // 可增加的操作内容
     showActions() {
       if (!this.rows || this.rows.length == 0) return false;
-      var show = this.showPublish || this.showEdit || this.showDel;
+      var show = this.showEdit || this.showDel;
       if (show || this.actions) {
         for (var i = 0; i < this.actions.length; i++) {
           var a = this.actions[i];
@@ -420,20 +379,6 @@ export default {
       if (
         o &&
         typeof o.display == "function" &&
-        this.permissionButton(o.code)
-      ) {
-        display = o.display.call(this, row);
-      }
-      return display;
-    },
-    // 显示发布
-    showPublish(row) {
-      var o = this.curd.publish;
-      let display = false;
-      if (
-        o &&
-        typeof o.display == "function" &&
-        o.api &&
         this.permissionButton(o.code)
       ) {
         display = o.display.call(this, row);
@@ -510,66 +455,6 @@ export default {
         this.$router.push(`/contentDetails/noticeRelease/edit`);
       }
     },
-    // 发布
-    publish(row) {
-      if (this.showPublish) {
-        var o = this.curd.publish;
-        this.$confirm(`是否发布选中的${o.tips}，发布后将不能恢复！`, "提示", {
-          closeOnClickModal: false,
-        })
-          .then(() => {
-            var key = this.idField;
-            var ds = {};
-            ds[key] = row[this.idField];
-            o.api({ data: { ...ds } }).then((res) => {
-              if (utilConvert.isFunction(o.callback)) {
-                o.callback(ds[key]);
-              }
-              if (!res.code) {
-                this.$message.success("发布成功");
-                this.query();
-              }
-            });
-          })
-          .catch(() => {});
-      }
-    },
-    // 批量发布
-    publishAll() {
-      if (this.showPublishAll) {
-        var o = this.curd.publish;
-        if (this.checkedRows.length <= 0) {
-          this.$message({
-            showClose: true,
-            message: `请勾选需要发布的${o.tips}！`,
-            type: "error",
-            closeOnClickModal: false,
-          });
-        } else {
-          this.$confirm(`是否发布选中的${o.tips}，发布后将不能恢复！`, "提示", {
-            closeOnClickModal: false,
-          })
-            .then(() => {
-              var key = this.idField;
-              var ds = {};
-              ds[key] = [];
-              this.checkedRows.forEach((a) => {
-                ds[key].push(a[this.idField]);
-              });
-              o.api({ data: { ...ds } }).then((res) => {
-                if (typeof o.callback === "function") {
-                  o.callback(ds[key]);
-                }
-                if (!res.code) {
-                  this.$message.success("发布成功");
-                  this.query();
-                }
-              });
-            })
-            .catch(() => {});
-        }
-      }
-    },
     // 删除
     del(row) {
       if (this.showDel) {
@@ -622,42 +507,6 @@ export default {
                 }
                 if (!res.code) {
                   this.$message.success("删除成功");
-                  this.query();
-                }
-              });
-            })
-            .catch(() => {});
-        }
-      }
-    },
-    // 批量取消发布
-    cancelPublishAll() {
-      if (this.showCancelPublishAll) {
-        var o = this.curd.cancelPublish;
-        if (this.checkedRows.length <= 0) {
-          this.$message({
-            showClose: true,
-            message: `请勾选需要取消的${o.tips}！`,
-            type: "error",
-            closeOnClickModal: false,
-          });
-        } else {
-          this.$confirm(`是否取消选中的${o.tips}，取消后将不能恢复！`, "提示", {
-            closeOnClickModal: false,
-          })
-            .then(() => {
-              var key = this.idField;
-              var ds = {};
-              ds[key] = [];
-              this.checkedRows.forEach((a) => {
-                ds[key].push(a[this.idField]);
-              });
-              o.api({ data: { ...ds } }).then((res) => {
-                if (typeof o.callback === "function") {
-                  o.callback(ds[key]);
-                }
-                if (!res.code) {
-                  this.$message.success("取消成功");
                   this.query();
                 }
               });

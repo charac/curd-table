@@ -1,52 +1,51 @@
 <!--
  * @since: 2021-11-29 16:50:45
  * @LastAuthor: Do not edit
- * @lastTime: 2021-11-29 17:00:04
- * @文件相对于项目的路径: \financial-sx-org-webe:\npm仓库\curd-table\examples\views\curdTable\index.vue
+ * @lastTime: 2021-11-30 09:22:05
+ * @文件相对于项目的路径: \financial-sx-sso-webe:\npm仓库\curd-table\examples\views\curdTable\index.vue
  * @Author: ltm@xtoneict.com
  * @message: 自定义表格demo
 -->
 <template>
-  <d2-container>
-    <curd-table
-      ref="table"
-      :curd="curd"
-      id-field="id"
-      sort-field="name"
-      :action-width="200"
-      :actions="actions"
+  <!-- <d2-container> -->
+  <curd-table
+    ref="table"
+    :curd="curd"
+    sort-field="name"
+    :action-width="200"
+    :actions="actions"
+  >
+    <template #toolbar>
+      <!-- <searchBar :model="curd.formModel" /> -->
+    </template>
+    <el-table-column
+      label="公告标题"
+      prop="noticeTitle"
+      width="400"
+      show-overflow-tooltip
     >
-      <template #toolbar>
-        <!-- <searchBar :model="curd.formModel" /> -->
+      <template v-slot="scope">
+        <noticeTextIcon :row="scope.row" showIcon />
       </template>
-      <el-table-column
-        label="公告标题"
-        prop="noticeTitle"
-        width="400"
-        show-overflow-tooltip
-      >
-        <template v-slot="scope">
-          <noticeTextIcon :row="scope.row" showIcon />
-        </template>
-      </el-table-column>
-      <el-table-column
-        label="发布部门"
-        prop="organizationName"
-        show-overflow-tooltip
-      />
-      <el-table-column label="通知类别" prop="noticeTypeName" />
-      <el-table-column label="发布时间" prop="noticeCreateTime" width="200" />
-      <el-table-column label="置顶状态" prop="noticeStick">
-        <template v-slot="scope">
-          <textColor
-            :value="scope.row.noticeStick"
-            :enums="$enums.noticeStick"
-            :colorNotes="false"
-          />
-        </template>
-      </el-table-column>
-    </curd-table>
-  </d2-container>
+    </el-table-column>
+    <el-table-column
+      label="发布部门"
+      prop="organizationName"
+      show-overflow-tooltip
+    />
+    <el-table-column label="通知类别" prop="noticeTypeName" />
+    <el-table-column label="发布时间" prop="noticeCreateTime" width="200" />
+    <el-table-column label="置顶状态" prop="noticeStick">
+      <template v-slot="scope">
+        <textColor
+          :value="scope.row.noticeStick"
+          :enums="$enums.noticeStick"
+          :colorNotes="false"
+        />
+      </template>
+    </el-table-column>
+  </curd-table>
+  <!-- </d2-container> -->
 </template>
 <script>
 // import {
@@ -67,7 +66,7 @@ export default {
         query: {
           data: {},
           // 列表
-          api: null,
+          // api: null,
         },
         idField: "",
         // 查询form参数

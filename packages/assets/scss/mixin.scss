@@ -1,0 +1,151 @@
+/* 背景border box-shadow */
+@mixin border-shadow {
+  background-color: #ffffff;
+  box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.1);
+  ;
+}
+
+/* 字体颜色值 */
+@mixin fontColor($fontDeault:#fff) {
+  color: $fontDeault;
+}
+
+/* 背景图片地址和大小 */
+@mixin bis($url) {
+  background-image: url($url);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+/* 图片格式 */
+@mixin setImg($width, $height, $url) {
+  width: $width;
+  height: $height;
+  display: inline-block;
+  vertical-align: middle;
+  @include bis($url);
+}
+
+/* 流程配置--card详情 */
+@mixin card {
+  position: relative;
+  background-color: #fafdfc;
+  transition: all .2s ease-in-out;
+
+  &:hover {
+    border-color: $colorMain;
+
+    .card-edit-btn {
+      display: block;
+
+      button {
+        color: #fff;
+        padding: 5px 8px;
+        cursor: pointer;
+        background-color: $colorMain;
+      }
+    }
+  }
+}
+
+
+/* toolbar-btn样式 */
+@mixin toolbarBtn($url, $width, $height) {
+  display: inline-block;
+  vertical-align: middle;
+  width: $width;
+  height: $height;
+  margin-right: 10px;
+  background: url($url) no-repeat;
+}
+
+
+/* drag-list样式 */
+@mixin dragList($width, $height) {
+  display: inline-block;
+  vertical-align: middle;
+  width: $width;
+  height: $height;
+}
+
+
+
+/* toolbar样式 */
+@mixin toolbar($border) {
+  padding: 0 0 15px;
+  border-bottom: $border;
+}
+
+
+/* 定位全屏 */
+.allcover {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+/* transform上下左右居中 */
+@mixin ctt {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* 定位上下左右居中 */
+@mixin ctp($width, $height) {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -$height/2;
+  margin-left: -$width/2;
+}
+
+/* 定位上下居中 */
+.tb {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* 定位左右居中 */
+.lr {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* 宽高 */
+@mixin wh($width, $height) {
+  width: $width;
+  height: $height;
+}
+
+/* 字体大小、行高、字体 */
+@mixin ft($size, $line-height) {
+  font-size: $size;
+  line-height: $line-height;
+}
+
+/* 字体大小，颜色 */
+@mixin sc($size, $color) {
+  font-size: $size;
+  color: $color;
+}
+
+//flex 布局和 子元素 对其方式
+// .fj($type: space-between){
+// 	display: flex;
+// 	justify-content: @type;
+
+// }
+//
+//多行超出省略号
+@mixin ellipsis($line: 2, $line-height: 1.2) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $line;
+  line-height: $line-height;
+}

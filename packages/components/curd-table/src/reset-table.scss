@@ -2,17 +2,20 @@
 * @desc: 'table样式',
 */
 
-@import '~@/assets/scss/mixin.scss';
+@import '~/assets/scss/mixin.scss';
 
 .table-common {
   width: 100%;
   border: none;
+
   // height: 100%;
   .el-card__body {
     padding: 0;
+
     .el-form {
       display: flex;
       justify-content: space-between;
+
       .el-form-item__label {
         white-space: nowrap;
       }
@@ -28,6 +31,7 @@
     &::before {
       height: 0;
     }
+
     th {
       color: #4d4c4f;
       background-color: #eee;
@@ -43,7 +47,7 @@
       color: #666;
       white-space: nowrap;
 
-      .svg-icon{
+      .svg-icon {
         margin: 0 5px;
         white-space: nowrap;
         cursor: pointer;

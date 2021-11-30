@@ -1,8 +1,8 @@
 /*
  * @since: 2021-11-24 15:38:51
  * @LastAuthor: Do not edit
- * @lastTime: 2021-11-24 16:11:40
- * @文件相对于项目的路径: \financial-sx-org-webe:\npm仓库\curd-table\vue.config.js
+ * @lastTime: 2021-11-30 10:10:50
+ * @文件相对于项目的路径: \financial-sx-sso-webe:\npm仓库\curd-table\vue.config.js
  * @Author: ltm@xtoneict.com
  * @message: vue.config.js配置项
  */
@@ -77,6 +77,22 @@ module.exports = {
           }
         }])
       }) */
+    // set svg-sprite-loader
+    config.module
+      .rule('svg')
+      .exclude.add(resolve('packages/icons'))
+      .end()
+    config.module
+      .rule('icons')
+      .test(/\.svg$/)
+      .include.add(resolve('packages/icons'))
+      .end()
+      .use('svg-sprite-loader')
+      .loader('svg-sprite-loader')
+      .options({
+        symbolId: 'icon-[name]',
+      })
+      .end()
     config.module
       .rule('js')
       .include.add(/packages/)
