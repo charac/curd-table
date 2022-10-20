@@ -3,7 +3,6 @@
  * @LastAuthor: Do not edit
  * @lastTime: 2021-11-30 08:59:22
  * @文件相对于项目的路径: \financial-sx-sso-webe:\npm仓库\curd-table\examples\router\index.js
- * @Author: ltm@xtoneict.com
  * @message: 
  */
 import { createRouter, createWebHashHistory } from 'vue-router'
